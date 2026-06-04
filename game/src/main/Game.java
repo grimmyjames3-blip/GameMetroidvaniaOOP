@@ -11,7 +11,7 @@ public class Game implements Runnable {
     private Player player;
 
     public Game(){
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
         initClasses();
