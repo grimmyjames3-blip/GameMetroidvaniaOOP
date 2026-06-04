@@ -34,21 +34,10 @@ public class GamePanel extends JPanel {
         setMaximumSize(size);
     }
 
-    public void changeXDelta(int delta) {
-        this.xDelta += delta;
-    }
-
-    public void changeYDelta(int delta) {
-        this.yDelta += delta;
-    }
-
-    public void setDeltas(int xDelta, int yDelta) {
-        this.xDelta = xDelta;
-        this.yDelta = yDelta;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        game.render(g);
     }
 }
