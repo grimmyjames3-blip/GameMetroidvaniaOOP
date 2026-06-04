@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
+import static Utilz.Constants.PlayerConstants.*;
+import static Utilz.Constants.Directions.*;
+
 public class GamePanel extends JPanel {
 
     private MouseInputs mouseInput = new MouseInputs(this);
@@ -33,6 +36,10 @@ public class GamePanel extends JPanel {
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);
+    }
+
+    public void setMoving(int direction){
+        
     }
 
     @Override
