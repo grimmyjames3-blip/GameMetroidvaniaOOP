@@ -44,6 +44,7 @@ public class GamePanel extends JPanel {
         game.render(g);
     }
 
+    // Ini nanti untuk entity
     public Game getGame(){
         return game;
     }
