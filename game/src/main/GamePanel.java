@@ -2,37 +2,31 @@ package main;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
-import java.awt.Graphics;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+import javax.swing.JPanel;
 
-import static Utilz.Constants.PlayerConstants.*;
-import static Utilz.Constants.Directions.*;
+import static main.Game.GAME_HEIGHT;
+import static main.Game.GAME_WIDTH;
 
 public class GamePanel extends JPanel {
-
+    
+    private Game game;
     private MouseInputs mouseInput = new MouseInputs(this);
     private KeyboardInputs keyboardInput = new KeyboardInputs(this);
-    private long lastTime = System.currentTimeMillis(); 
-    private Game game;
-    
+
     public GamePanel(Game game) {
         addKeyListener(keyboardInput);
         addMouseListener(mouseInput);
         addMouseMotionListener(mouseInput);
-        this.game = game;
         setPanelSize();
         setFocusable(true);
         requestFocus();
+        this.game = game;
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(1280, 800);
+        Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);
@@ -44,8 +38,7 @@ public class GamePanel extends JPanel {
         game.render(g);
     }
 
-    // Ini nanti untuk entity
-    public Game getGame(){
+    public Game getGame() {
         return game;
     }
 }
