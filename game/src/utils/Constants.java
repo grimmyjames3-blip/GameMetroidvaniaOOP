@@ -1,6 +1,41 @@
 package utils;
 
 public class Constants {
+    public static class EnemyConstants {
+		public static final int Enemy = 0;
+
+		public static final int Idle = 0;
+		public static final int Running = 1;
+		public static final int Attack = 2;
+		public static final int Hit = 3;
+		public static final int Dead = 4;
+
+		public static final int Enemy_Width_Default = 72;
+		public static final int Enemy_Height_Default = 32;
+
+		public static final int Enemy_Width = (int) (Enemy_Width_Default * Game.SCALE);
+		public static final int Enemy_Height = (int) (Enemy_Height_Default * Game.SCALE);
+
+		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
+
+			switch (enemy_type) {
+			case Enemy:
+				switch (enemy_state) {
+				case Idle:
+					return 9;
+				case Running:
+					return 6;
+				case Attack:
+					return 7;
+				case Hit:
+					return 4;
+				case Dead:
+					return 5;
+				}
+			}
+			return 0;
+		}
+	}
 
     public static class Directions {
         public static final int LEFT = 0;
