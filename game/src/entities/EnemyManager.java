@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 import gamestates.Playing;
 import utilz.LoadSave;
-import static Utilz.Constants.EnemyConstants.*; 
+import static utilz.Constants.EnemyConstants.*; 
 
 public class EnemyManager {
 
 	private Playing playing;
 	private BufferedImage[][] EnemyArr;
-	private ArrayList<Enemy> enemies = new ArrayList<>();
+	private ArrayList<Slime> slimes = new ArrayList<>();
 
 	public EnemyManager(Playing playing) {
 		this.playing = playing;
@@ -21,22 +21,22 @@ public class EnemyManager {
 	}
 
 	private void addEnemies() {
-		enemies = LoadSave.GetEnemies();
-		System.out.println("size of enemies: " + enemies.size());
+		slimes = LoadSave.GetSlimes();
+		System.out.println("size of slimes: " + slimes.size());
 	}
 
-	public void update() {
-		for (Enemy e : enemies)
-			e.update();
+	public void update(int[][] lvlData) {
+		for (Slime s : slimes)
+			s.update(lvlData);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
-		drawEnemies(g, xLvlOffset);
+		drawSlimes(g, xLvlOffset);
 	}
 
-	private void drawEnemies(Graphics g, int xLvlOffset) {
-		for (Enemy e : enemies)
-			e.draw(g, xLvlOffset);
+	private void drawSlimes(Graphics g, int xLvlOffset) {
+		for (Slime s : slimes)
+			s.draw(g, xLvlOffset);
 	}
 
 	private void loadEnemyImgs() {
