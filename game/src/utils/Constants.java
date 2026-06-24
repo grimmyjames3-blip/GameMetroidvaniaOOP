@@ -13,8 +13,8 @@ public class Constants {
 		public static final int ENEMY_WIDTH_Default = 72;
 		public static final int ENEMY_HEIGHT_Default = 32;
 
-		public static final int ENEMY_Width = (int) (ENEMY_WIDTH_Default * Game.SCALE);
-		public static final int ENEMY_Height = (int) (ENEMY_HEIGHT_Default * Game.SCALE);
+		public static final int ENEMY_WIDTH = (int) (ENEMY_WIDTH_Default * Game.SCALE);
+		public static final int ENEMY_HEIGHT = (int) (ENEMY_HEIGHT_Default * Game.SCALE);
 
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
 
