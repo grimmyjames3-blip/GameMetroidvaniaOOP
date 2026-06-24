@@ -16,6 +16,10 @@ public class Constants {
 		public static final int ENEMY_WIDTH = (int) (ENEMY_WIDTH_Default * Game.SCALE);
 		public static final int ENEMY_HEIGHT = (int) (ENEMY_HEIGHT_Default * Game.SCALE);
 
+		// Buat beda antara posisi gambar enemy dengan posisi hitbox enemy, karena gambar enemy lebih besar dari hitbox enemy
+        public static final int ENEMY_DRAWOFFSET_X = (int) (26 * Game.SCALE);
+        public static final int ENEMY_DRAWOFFSET_Y = (int) (9 * Game.SCALE);
+
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
 
 			switch (enemy_type) {
