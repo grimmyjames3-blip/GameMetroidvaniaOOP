@@ -7,6 +7,10 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import main.Game;
 
+// Buat ambil function dari constants and entity slime
+import entities.Slime;
+import static utilz.Constants.EnemyConstants.Enemy;
+
 public class LoadSave {
 
     public static final String PLAYER_ATLAS = "vend_sprites.png";
@@ -31,6 +35,21 @@ public class LoadSave {
             }       
         }
         return img;
+    }
+
+    // Buat summon enemy slime di map dimana pixel berwarna green
+    public static ArrayList<Slime> getSlimes(){
+        BufferedImage img = getSpriteAtlas(LEVEL_ONE_DATA);
+        ArrayList<Slime> list = new ArrayList<>();
+        for(int j = 0; j < img.getHeight(); j++){
+            for(int i = 0; i < img.getWidth(); i++){
+                Color color = new Color(img.getRGB(i, j));
+                int value = color.getGreen();
+                if (value == Enemy)
+                    list.add(new Slime(i * Game.TILE_SIZE, j * TiLE_SIZE));
+            }
+        return list;
+        }
     }
 
     public static int[][] getLevelData(){
