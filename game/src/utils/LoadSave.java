@@ -17,7 +17,7 @@ public class LoadSave {
     public static final String LEVEL_ATLAS = "outside_sprites.png";
     public static final String LEVEL_ONE_DATA = "level_one_data.png";
     // Ini buat sprite musuh
-    // public static final String ENEMY_SPRITE = "enemy_sprite";
+    // public static final String ENEMY_SPRITE = "enemy_sprite.png";
     
     public static BufferedImage getSpriteAtlas(String fileName) {
         BufferedImage img = null;
