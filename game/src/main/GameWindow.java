@@ -1,8 +1,7 @@
 package main;
 
-import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowEvent;
-
+import java.awt.event.WindowFocusListener;
 import javax.swing.JFrame;
 
 public class GameWindow {

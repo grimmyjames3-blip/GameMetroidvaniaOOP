@@ -54,10 +54,10 @@ public class Player extends Entity {
         }
     }
 
-    public void render(Graphics g, int lvlOffset){
-        g.drawImage(animations[PlayerAction][aniIndex], (int) (hitbox.x - xDrawOffset) - lvlOffset, (int) (hitbox.y - yDrawOffset), width, height, null);
-        // drawHitbox(g, lvlOffset);
-	}
+    public void render(Graphics g) {
+        g.drawImage(animations[playerAction][animationIndex], (int)hitbox.x - (int)xDrawOffset, (int)hitbox.y - (int)yDrawOffset, width, height, null);
+        // drawHitbox(g);
+    }
 
     public void setAnimation() {
         int startAni = playerAction;

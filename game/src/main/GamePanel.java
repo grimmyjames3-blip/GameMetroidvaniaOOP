@@ -5,7 +5,6 @@ import inputs.MouseInputs;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-
 import static main.Game.GAME_HEIGHT;
 import static main.Game.GAME_WIDTH;
 
@@ -20,8 +19,8 @@ public class GamePanel extends JPanel {
         addMouseListener(mouseInput);
         addMouseMotionListener(mouseInput);
         setPanelSize();
-        setFocusable(true);
-        requestFocus();
+        this.setFocusable(true);
+        this.requestFocusInWindow();
         this.game = game;
     }
 
