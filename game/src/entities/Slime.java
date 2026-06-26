@@ -8,6 +8,11 @@ public class Slime extends Enemy{
         initHitbox(x, y,(int)(22 * Game.scale), (int)(19 * Game.scale));
     }
 
+	public void update(int[][] lvlData) {
+		updateMove(lvlData);
+		updateAnimationTick();
+	}
+
     private void updateMove(int[][] lvlData) {
 		if(firstUpdate){
 			if(!IsEntityOnFloor(hitbox, lvlData))
