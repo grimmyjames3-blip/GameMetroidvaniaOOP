@@ -50,9 +50,12 @@ public class Slime extends Enemy{
 					move(lvlData);
 					break;
 				case ATTACK:
+					if(aniIndex == 0){
+						attackChecked = false;
+					}
 					// Buat check animasi attack enemy apakah kena player di animationIndex sprite ke berapa
 					if(aniIndex == 3 && !attackChecked){
-						checkEnemyHit(attackBox, player);
+						checkPlayerHit(attackBox, player);
 					}
 					break;
 				case HIT:
