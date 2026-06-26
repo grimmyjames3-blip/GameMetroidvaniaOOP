@@ -42,9 +42,11 @@ public class EnemyManager {
 	}
 
 	private void drawSlimes(Graphics g, int xLvlOffset) {
-		for (Slime s : slimes)
+		for (Slime s : slimes){
 			s.drawImage(EnemyArr[s.getEnemyState()][s.getAniIndex()], (int)s.getHitbox().x - xLvlOffset - ENEMY_DRAWOFFSET_X + s.flipX(), (int)s.getHitbox().y, ENEMY_WIDTH * s.flipW(), ENEMY_HEIGHT, null);
-		//s.drawHitBox(g. xLvlOffset);
+		//	s.drawHitBox(g, xLvlOffset);
+			s.drawAttackBox(g, xLvlOffset);
+		}
 	}
 
 	private void loadEnemyImgs() {
