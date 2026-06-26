@@ -5,14 +5,14 @@ import static utilz.HelpMethods.*;
 import static utilz.Constants.Directions.*;
 
 public abstract class Enemy extends Entity{
-    private int aniIndex, enemyState, enemyType;
-	private int aniTick, aniSpeed = 25;
-	private boolean firstUpdate = true;
-	private boolean inAir;
-	private float fallSpeed = 0.5f;
-	private float gravity = 0.04f * Game.scale;
-	private float walkSpeed = 0.35f * Game.scale;
-	private int walkDir = LEFT;
+    protected int aniIndex, enemyState, enemyType;
+	protected int aniTick, aniSpeed = 25;
+	protected boolean firstUpdate = true;
+	protected boolean inAir;
+	protected float fallSpeed = 0.5f;
+	protected float gravity = 0.04f * Game.scale;
+	protected float walkSpeed = 0.35f * Game.scale;
+	protected int walkDir = LEFT;
 
     public Enemy(float x, float y, int width, int height, int enemyType) {
         super(x, y, width, height);
