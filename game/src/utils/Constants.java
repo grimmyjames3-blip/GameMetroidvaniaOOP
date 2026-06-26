@@ -87,6 +87,15 @@ public class Constants {
 					return 1;
 			}
 		}
+
+		public static int GetEnemyDamage(int enemy_type){
+			switch(enemy_type){
+				case ENEMY:
+					return 15;
+				default:
+					return 0;
+			}
+		}
 	}
 
     public static class Directions {
