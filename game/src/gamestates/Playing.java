@@ -137,7 +137,7 @@ public class Playing extends State implements Statemethods{
 	}
 
 	public void checkEnemyHit(Rectangle2D.Float attackBox){
-		enemyManager.checkPlayerHit(attackBox);
+		enemyManager.checkEnemyHit(attackBox);
 	}
 	
 	@Override
