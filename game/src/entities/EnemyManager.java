@@ -69,4 +69,10 @@ public class EnemyManager {
 			for (int i = 0; i < EnemyArr[j].length; i++)
 				EnemyArr[j][i] = temp.getSubimage(i * ENEMY_WIDTH_DEFAULT, j * ENEMY_HEIGHT_DEFAULT, ENEMY_WIDTH_DEFAULT, ENEMY_HEIGHT_DEFAULT);
 	}
+
+	public void resetAllEnemies(){
+		for(Slime s : slimes){
+			s.resetEnemy();
+		}
+	}
 }
