@@ -8,12 +8,12 @@ public class Slime extends Enemy{
         initHitbox(x, y,(int)(22 * Game.scale), (int)(19 * Game.scale));
     }
 
-	public void update(int[][] lvlData) {
-		updateMove(lvlData);
+	public void update(int[][] lvlData, Player player) {
+		updateMove(lvlData, player);
 		updateAnimationTick();
 	}
 
-    private void updateMove(int[][] lvlData) {
+    private void updateMove(int[][] lvlData, Player player) {
 		if(firstUpdate)
 			firstUpdateCheck(lvlData);
 		if(inAir){
@@ -24,6 +24,7 @@ public class Slime extends Enemy{
 					newState(RUNNING);
 					break;
 				case RUNNING:
+					if(canSeePlayer(lvlData, player))
 					move(lvlData);
 					break;
 			}
