@@ -109,7 +109,7 @@ public abstract class Enemy extends Entity{
 
 	protected void checkPlayerHit(Rectangle2D.Float attackBox, Player player){
 		if(attackBox.intersects(player.hitbox)){
-			player.changeHealth(GetEnemyDmg(enemyType));
+			player.changeHealth(-GetEnemyDmg(enemyType));
 		}
 		attackChecked = true;
 	}
