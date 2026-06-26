@@ -44,6 +44,6 @@ public class EnemyManager {
 		BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.ENEMY_SPRITE);
 		for (int j = 0; j < EnemyArr.length; j++)
 			for (int i = 0; i < EnemyArr[j].length; i++)
-				EnemyArr[j][i] = temp.getSubimage(i * Enemy_Width_Default, j * Enemy_Height_Default, Enemy_Width_Default, Enemy_Height_Default);
+				EnemyArr[j][i] = temp.getSubimage(i * ENEMY_WIDTH_DEFAULT, j * ENEMY_HEIGHT_DEFAULT, ENEMY_WIDTH_DEFAULT, ENEMY_HEIGHT_DEFAULT);
 	}
 }
