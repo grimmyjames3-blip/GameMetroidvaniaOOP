@@ -54,7 +54,7 @@ public class LoadSave {
 			for (int i = 0; i < img.getWidth(); i++) {
 				Color color = new Color(img.getRGB(i, j));
 				int value = color.getGreen();
-				if (value >= ENEMY)
+				if (value == ENEMY)
 					list.add(new Slime(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
 			}
 		return list;
