@@ -30,7 +30,7 @@ public class EnemyManager {
 	public void update(int[][] lvlData, Player player) {
 		for (Slime s : slimes)
 			if (s.isActive()){
-				s.update(lvlData);
+				s.update(lvlData, player);
 				isActive(s);
 			}
 		if(!isActive(slimes))
@@ -43,17 +43,21 @@ public class EnemyManager {
 
 	private void drawSlimes(Graphics g, int xLvlOffset) {
 		for (Slime s : slimes){
-			s.drawImage(EnemyArr[s.getEnemyState()][s.getAniIndex()], (int)s.getHitbox().x - xLvlOffset - ENEMY_DRAWOFFSET_X + s.flipX(), (int)s.getHitbox().y, ENEMY_WIDTH * s.flipW(), ENEMY_HEIGHT, null);
-		//	s.drawHitBox(g, xLvlOffset);
-			s.drawAttackBox(g, xLvlOffset);
+			if(s.isActive()){
+				s.drawImage(EnemyArr[s.getEnemyState()][s.getAniIndex()], (int)s.getHitbox().x - xLvlOffset - ENEMY_DRAWOFFSET_X + s.flipX(), (int)s.getHitbox().y, ENEMY_WIDTH * s.flipW(), ENEMY_HEIGHT, null);
+			//	s.drawHitBox(g, xLvlOffset);
+				s.drawAttackBox(g, xLvlOffset);
+			}
 		}
 	}
 
 	public void checkEnemyHit(Rectangele2D.Float attackBox){
 		for(Slime s : slimes){
-			if(attackBox.intersects(s.getHitbox())){
-				s.hurt(10);
-				return;
+			if(s.isActive()){
+				if(attackBox.intersects(s.getHitbox())){
+					s.hurt(10);
+					return;
+				}
 			}
 		}
 	}
