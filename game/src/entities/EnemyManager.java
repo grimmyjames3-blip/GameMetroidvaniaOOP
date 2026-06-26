@@ -1,10 +1,12 @@
 package Entities;
 
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import gamestates.Playing;
+import levels.Level;
 import utilz.LoadSave;
 import static utilz.Constants.EnemyConstants.*; 
 
@@ -27,7 +29,12 @@ public class EnemyManager {
 
 	public void update(int[][] lvlData, Player player) {
 		for (Slime s : slimes)
-			s.update(lvlData, player);
+			if (s.isActive()){
+				s.update(lvlData);
+				isActive(s);
+			}
+		if(!isActive(slimes))
+			playing.setLevelCompleted(true);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
