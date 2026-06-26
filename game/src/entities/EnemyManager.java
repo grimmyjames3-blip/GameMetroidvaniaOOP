@@ -46,7 +46,7 @@ public class EnemyManager {
 			if(s.isActive()){
 				s.drawImage(EnemyArr[s.getEnemyState()][s.getAniIndex()], (int)s.getHitbox().x - xLvlOffset - ENEMY_DRAWOFFSET_X + s.flipX(), (int)s.getHitbox().y, ENEMY_WIDTH * s.flipW(), ENEMY_HEIGHT, null);
 			//	s.drawHitBox(g, xLvlOffset);
-				s.drawAttackBox(g, xLvlOffset);
+			//	s.drawAttackBox(g, xLvlOffset);
 			}
 		}
 	}
