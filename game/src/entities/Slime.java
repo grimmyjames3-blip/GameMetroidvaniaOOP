@@ -18,13 +18,7 @@ public class Slime extends Enemy{
 			firstUpdateCheck(lvlData);
 
 		if(inAir){
-			if(CanMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.width, hitbox.height, lvlData)){
-				hitbox.y += fallSpeed;
-				fallSpeed += gravity;
-			}else{  
-				inAir = false;
-				hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, fallSpeed);
-			}
+			updateInAir(lvlData);
 		}else{
 			switch(enemyState){
 				case IDLE:
