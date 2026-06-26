@@ -110,7 +110,7 @@ public class Player extends Entity {
 			return;
 		}
 		attackChecked = true;
-		playing.checkPlayerHit(attackBox);
+		playing.checkEnemyHit(attackBox);
 	}
 
 	private void updateAttackBox(){
