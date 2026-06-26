@@ -61,9 +61,8 @@ public class Constants {
         public static final int ENEMY_DRAWOFFSET_Y = (int) (9 * Game.SCALE);
 
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
-
 			switch (enemy_type) {
-			case ENEMY:
+				case ENEMY:
 				switch (enemy_state) {
 				case IDLE:
 					return 9;
@@ -78,6 +77,15 @@ public class Constants {
 				}
 			}
 			return 0;
+		}
+
+		public static int GetMaxHealth(int enemy_type){
+			switch(enemy_type){
+				case ENEMY:
+					return 10;
+				default:
+					return 1;
+			}
 		}
 	}
 
