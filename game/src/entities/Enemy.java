@@ -26,6 +26,16 @@ public abstract class Enemy extends Entity{
 		firstUpdate = false;
 	}
 
+	protected void updateInAir(int[][] lvlData){
+		if(CanMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.width, hitbox.height, lvlData)){
+			hitbox.y += fallSpeed;
+			fallSpeed += gravity;
+		}else{  
+			inAir = false;
+			hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, fallSpeed);
+		}
+	}
+
     protected void updateAnimationTick() {
 		aniTick++;
 		if (aniTick >= aniSpeed) {
