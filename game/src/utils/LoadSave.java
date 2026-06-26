@@ -29,6 +29,7 @@ public class LoadSave {
 	public static final String SLIME_SPRITE = "slime_sprite.png";
 	// Sesuaikan nama res UI health bar dengan nama file UI health bar di dalam res folder
 	public static final String STATUS_BAR = "health_power_bar.png";
+	public static final String COMPLETED_IMG = "completed_sprite.png";
     
     public static BufferedImage GetSpriteAtlas(String fileName) {
         BufferedImage img = null;
@@ -47,6 +48,39 @@ public class LoadSave {
         }
         return img;
     }
+
+	public static BufferedImage[] GetAllLevels() {
+		URL url = LoadSave.class.getResource("/lvls");
+		File file = null;
+
+		try {
+			file = new File(url.toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+		File[] files = file.listFiles();
+		File[] filesSorted = new File[files.length];
+
+		for (int i = 0; i < filesSorted.length; i++)
+			for (int j = 0; j < files.length; j++) {
+				if (files[j].getName().equals((i + 1) + ".png"))
+					filesSorted[i] = files[j];
+
+			}
+
+		BufferedImage[] imgs = new BufferedImage[filesSorted.length];
+
+		for (int i = 0; i < imgs.length; i++)
+			try {
+				imgs[i] = ImageIO.read(filesSorted[i]);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		return imgs;
+	}
+
 
 	public static ArrayList<Slime> GetSlimes(){
 		BufferedImage img = GetSpriteAtlas(SLIME_SPRITE);
