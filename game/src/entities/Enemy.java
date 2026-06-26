@@ -20,6 +20,12 @@ public abstract class Enemy extends Entity{
         initHitbox(x, y, width, height);
     }
 
+	protected void firstUpdateCheck(int[][] lvlData){
+		if(!IsEntityOnFloor(hitbox, lvlData))
+			inAir = true;
+		firstUpdate = false;
+	}
+
     protected void updateAnimationTick() {
 		aniTick++;
 		if (aniTick >= aniSpeed) {
