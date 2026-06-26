@@ -70,8 +70,12 @@ public class Player extends Entity {
 	private int flipX = 0;
 	private int flipW = 1;
 
-    public Player(float x, float y, int width, int height) {
+	private boolean attackChecked = false;
+	private Playing playing;
+
+    public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
+		this.playing = playing;
         loadAnimations();
         initHitbox(x, y, (int)(15 * Game.SCALE), (int)(29 * Game.SCALE));
 		initAttackBox();
@@ -93,9 +97,21 @@ public class Player extends Entity {
 		updateHealthBar();
 		updateAttackBox();
         updatePos();
+		if(attacking){
+			checkAttack();
+		}
         updateAnimationTick();
         setAnimation();
     }
+
+	private void checkAttack(){
+		// Cek animasi attack player sesuai dengan animasi sprite index attack player
+		if(attackChecked || aniIndex != 1){
+			return;
+		}
+		attackChecked = true;
+		playing.checkPlayerHit(attackBox);
+	}
 
 	private void updateAttackBox(){
 		//(Game.SCALE * 10) hanya buat offset attackBoxnya
