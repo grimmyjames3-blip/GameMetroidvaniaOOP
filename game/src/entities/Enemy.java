@@ -53,6 +53,12 @@ public abstract class Enemy extends Entity{
 		changeWalkDir();
 	}
 
+	protected void newState(int enemyState){
+		this.enemyState = enemyState;
+		aniTick = 0;
+		aniIndex = 0;
+	}
+
     protected void updateAnimationTick() {
 		aniTick++;
 		if (aniTick >= aniSpeed) {
