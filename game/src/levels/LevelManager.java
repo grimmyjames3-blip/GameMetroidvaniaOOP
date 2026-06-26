@@ -2,6 +2,9 @@ package levels;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import gamestates.Gamestate;
 import main.Game;
 import utils.LoadSave;
 
@@ -9,12 +12,34 @@ public class LevelManager {
 
 	private Game game;
 	private BufferedImage[] levelSprite;
+	private ArrayList<Level> levels;
 	private Level levelOne;
 
 	public LevelManager(Game game) {
 		this.game = game;
 		importOutsideSprites();
-		levelOne = new Level(LoadSave.GetLevelData());
+		levels = new ArrayList<>();
+		buildAllLevels();
+	}
+
+	public void loadNextLevel() {
+		lvlIndex++;
+		if (lvlIndex >= levels.size()) {
+			lvlIndex = 0;
+			System.out.println("No more levels! Game Completed!");
+			Gamestate.state = Gamestate.MENU;
+		}
+
+		Level newLevel = levels.get(lvlIndex);
+		game.getPlaying().getEnemyManager().loadEnemies(newLevel);
+		game.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
+		game.getPlaying().setMaxLvlOffset(newLevel.getLvlOffset());
+	}
+
+	private void buildAllLevels() {
+		BufferedImage[] allLevels = LoadSave.GetAllLevels();
+		for (BufferedImage img : allLevels)
+			levels.add(new Level(img));
 	}
 
 	private void importOutsideSprites() {
@@ -42,7 +67,10 @@ public class LevelManager {
 	}
 
 	public Level getCurrentLevel() {
-		return levelOne;
+		return levels.get(lvlIndex);
 	}
 
+	public int getAmountOfLevels() {
+		return levels.size();
+	}
 }
