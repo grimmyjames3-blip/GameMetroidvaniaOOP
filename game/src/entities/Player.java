@@ -153,6 +153,7 @@ public class Player extends Entity {
 			if (aniIndex >= GetSpriteAmount(playerAction)) {
 				aniIndex = 0;
 				attacking = false;
+				attackChecked = false;
 			}
 		}
     }
@@ -172,8 +173,14 @@ public class Player extends Entity {
 				playerAction = FALLING;
 		}
 
-		if (attacking)
+		if (attacking){
 			playerAction = ATTACK;
+			if(startAni != ATTACK){
+				aniIndex = 1;
+				aniTick = 0;
+				return;
+			}
+		}
 
 		if (startAni != playerAction)
 			resetAniTick();
