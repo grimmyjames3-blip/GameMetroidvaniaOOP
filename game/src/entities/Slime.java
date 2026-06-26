@@ -25,27 +25,7 @@ public class Slime extends Enemy{
 					enemyState = RUNNING;
 					break;
 				case RUNNING:
-					float xSpeed = 0;
-
-					if(walkDir == LEFT){
-						xSpeed = -walkSpeed;
-					}else{
-						xSpeed = walkSpeed;
-					}
-
-					if(CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)){
-						if(IsFloor(hitbox, xSpeed, lvlData)){
-							hitbox.x += xSpeed;
-							return;
-						}else{
-							if(walkDir == LEFT){
-								walkDir = RIGHT;
-							}else{
-								walkDir = LEFT;
-							}
-						}
-					}
-					changeWalkDir();
+					move(lvlData);
 					break;
 			}
 		}
