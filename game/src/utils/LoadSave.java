@@ -27,6 +27,8 @@ public class LoadSave {
 	public static final String SMALL_CLOUDS = "small_cloud.png";
 	// Sesuaikan nama res slime dengan nama file slime di dalam res folder
 	public static final String SLIME_SPRITE = "slime_sprite.png";
+	// Sesuaikan nama res UI health bar dengan nama file UI health bar di dalam res folder
+	public static final String STATUS_BAR = "health_power_bar.png";
     
     public static BufferedImage GetSpriteAtlas(String fileName) {
         BufferedImage img = null;
