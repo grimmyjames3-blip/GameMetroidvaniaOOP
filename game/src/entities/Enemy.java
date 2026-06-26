@@ -56,6 +56,14 @@ public abstract class Enemy extends Entity{
 		changeWalkDir();
 	}
 
+	protected void turnTowardsPlayer(Player player){
+		if(player.hitbox.x > hitbox.x){
+			walkDir = RIGHT;
+		}else{
+			walkDir = LEFT;
+		}
+	}
+
 	protected boolean canSeePlayer(int[][] lvlData, PLayer player){
 		int playerTileY = (int) (player.getHitbox().y / Game.TILES_SIZE);
 		if(playerTileY == tileY){
@@ -73,6 +81,11 @@ public abstract class Enemy extends Entity{
 		return absValue <= attackDistance * 5;
 	}
 
+	protected boolean isPlayerCloseForAttack(Player player){
+		int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
+		return absValue <= attackDistance;
+	}
+
 	protected void newState(int enemyState){
 		this.enemyState = enemyState;
 		aniTick = 0;
@@ -86,6 +99,9 @@ public abstract class Enemy extends Entity{
 			aniIndex++;
 			if (aniIndex >= GetSpriteAmount(enemyType, enemyState)) {
 				aniIndex = 0;
+				if(enemyState == ATTACK){
+					enemyState == IDLE;
+				}
 			}
 		}
 	}
