@@ -23,6 +23,7 @@ public class Playing extends State implements Statemethods{
     private LevelManager levelManager;
 	private EnemyManager enemyManager;
     private PauseOverlay pauseOverlay;
+	private GameOverOverlay gameOverOverlay;
 	private levelCompletedOverlay levelCompletedOverlay;
     private boolean paused = false;
 
@@ -71,6 +72,7 @@ public class Playing extends State implements Statemethods{
 		player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
 		player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn()); 
         pauseOverlay = new PauseOverlay(this);
+		gameOverOverlay = new gameOverOverlay(this);
 		levelCompletedOverlay = new levelCompletedOverlay(this);
     }
 
@@ -136,49 +138,60 @@ public class Playing extends State implements Statemethods{
 		enemyManager.resetAllEnemies();
 	}
 
+	public void setGameOver(boolean gameOver){
+		this.gameOver = gameOver;
+	}
+
 	public void checkEnemyHit(Rectangle2D.Float attackBox){
 		enemyManager.checkEnemyHit(attackBox);
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1){
-			player.setAttacking(true);
+		if(!gameOver){
+			if (e.getButton() == MouseEvent.BUTTON1){
+				player.setAttacking(true);
+			}
 		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_A:
-			player.setLeft(true);
-			break;
-		case KeyEvent.VK_D:
-			player.setRight(true);
-			break;
-		case KeyEvent.VK_SPACE:
-			player.setJump(true);
-			break;
-		case KeyEvent.VK_ESCAPE:
-			paused = !paused;
-			break;
+		if(gameOver){
+			gameOverOverlay.keyPressed(e);
+		}else{
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_A:
+				player.setLeft(true);
+				break;
+			case KeyEvent.VK_D:
+				player.setRight(true);
+				break;
+			case KeyEvent.VK_SPACE:
+				player.setJump(true);
+				break;
+			case KeyEvent.VK_ESCAPE:
+				paused = !paused;
+				break;
+			}
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_A:
-			player.setLeft(false);
-			break;
-		case KeyEvent.VK_D:
-			player.setRight(false);
-			break;
-		case KeyEvent.VK_SPACE:
-			player.setJump(false);
-			break;
+		if(!gameOver){
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_A:
+				player.setLeft(false);
+				break;
+			case KeyEvent.VK_D:
+				player.setRight(false);
+				break;
+			case KeyEvent.VK_SPACE:
+				player.setJump(false);
+				break;
+			}
 		}
-
 	}
 
 	public void mouseDragged(MouseEvent e) {
