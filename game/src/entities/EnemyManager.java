@@ -25,9 +25,9 @@ public class EnemyManager {
 		System.out.println("size of slimes: " + slimes.size());
 	}
 
-	public void update(int[][] lvlData) {
+	public void update(int[][] lvlData, Player player) {
 		for (Slime s : slimes)
-			s.update(lvlData);
+			s.update(lvlData, player);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
