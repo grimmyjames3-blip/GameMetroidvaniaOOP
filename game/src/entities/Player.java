@@ -342,4 +342,20 @@ public class Player extends Entity {
 	public void setDown(boolean down) {
 		this.down = down;
 	}
+
+	public void resetAll(){
+		resetDirBooleans();
+		inAir = false;
+		attacking = false;
+		moving = false;
+		playerAction = IDLE;
+		currentHealth = maxHealth;
+
+		hitbox.x = x;
+		hitbox.y = y;
+
+		if(!IsEntityOnFloor(hitbox, lvlData)){
+			inAir = true;
+		}
+	}
 }
