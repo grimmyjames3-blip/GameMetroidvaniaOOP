@@ -55,7 +55,6 @@ public class HelpMethods {
 			return tileYPos + yOffset - 1;
 		} else
 			return currentTile * Game.TILES_SIZE;
-
 	}
 
 	public static boolean IsEntityOnFloor(Rectangle2D.Float hitbox, int[][] lvlData) {
@@ -64,9 +63,10 @@ public class HelpMethods {
 				return false;
 			}
 		}
-
 		return true;
-
 	}
 
+	public static boolean IsFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData){
+		return IsSolid(hitbox.x + xSpeed, hitbox.y, lvlData);
+	}
 }
