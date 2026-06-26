@@ -15,11 +15,15 @@ public abstract class Enemy extends Entity{
 	protected int walkDir = LEFT;
 	protected int tileY;
 	protected float attackDistance = Game.TILES_SIZE;
+	protected int maxHealth;
+	protected int currentHealth;
 
     public Enemy(float x, float y, int width, int height, int enemyType) {
         super(x, y, width, height);
         this.enemyType = enemyType;
         initHitbox(x, y, width, height);
+		maxHealth = GetMaxHealth(enemyType);
+		currentHealth = maxHealth;
     }
 
 	protected void firstUpdateCheck(int[][] lvlData){
