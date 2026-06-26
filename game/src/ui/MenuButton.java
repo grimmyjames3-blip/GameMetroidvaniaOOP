@@ -1,11 +1,11 @@
 package ui;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import gamestates.Gamestate;
+import java.awt.Graphics;
 import java.awt.Rectangle;
-import utils.LoadSave;
+import java.awt.image.BufferedImage;
 import static utils.Constants.UI.Buttons.*;
+import utils.LoadSave;
 
 public class MenuButton {
     private int xOffsetCenter = B_WIDTH / 2;
@@ -31,7 +31,7 @@ public class MenuButton {
 
     private void loadImgs(){
         imgs = new BufferedImage[3];
-        BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.MENU_BUTTONS);
+        BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.MENU_BUTTONS);
         for (int i = 0; i < imgs.length; i++){
             imgs[i] = temp.getSubimage(i * B_WIDTH_DEFAULT, rowIndex * B_HEIGHT_DEFAULT, B_WIDTH_DEFAULT, B_HEIGHT_DEFAULT);
         }

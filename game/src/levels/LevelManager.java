@@ -6,42 +6,43 @@ import main.Game;
 import utils.LoadSave;
 
 public class LevelManager {
-    private Game game;
-    private BufferedImage[] levelSprite;
-    private Levels level_one;
 
-    public LevelManager(Game game) {
-        this.game = game;
-        importOutsideSprites();
-        level_one = new Levels(LoadSave.getLevelData());
-    }
+	private Game game;
+	private BufferedImage[] levelSprite;
+	private Level levelOne;
 
-    public void importOutsideSprites() {
-        BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.LEVEL_ATLAS);
-        levelSprite = new BufferedImage[48];
+	public LevelManager(Game game) {
+		this.game = game;
+		importOutsideSprites();
+		levelOne = new Level(LoadSave.GetLevelData());
+	}
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 12; j++) {
-                int index = i * 12 + j;
-                levelSprite[index] = img.getSubimage(j * 32, i * 32, 32, 32);
-            }
-        }
-    }
+	private void importOutsideSprites() {
+		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.LEVEL_ATLAS);
+		levelSprite = new BufferedImage[162];
+		for (int j = 0; j < 18; j++){
+			for (int i = 0; i < 9; i++) {
+				int index = j * 9 + i;
+				levelSprite[index] = img.getSubimage(i * 32, j * 32, 32, 32);
+			}
+		}
+	}
 
-    public void draw(Graphics g) {
-        for (int j = 0; j < Game.TILES_IN_HEIGHT; j++) {
-            for (int i = 0; i < Game.TILES_IN_WIDTH; i++) {
-                int index = level_one.getSpriteIndex(i, j);
-                g.drawImage(levelSprite[index], i * Game.TILE_SIZE, j * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE, null);
-            }
-        }
-    }
+	public void draw(Graphics g, int lvlOffset) {
+		for (int j = 0; j < Game.TILES_IN_HEIGHT; j++) {
+			for (int i = 0; i < levelOne.getLevelData()[0].length; i++) {
+				int index = levelOne.getSpriteIndex(i, j);
+				g.drawImage(levelSprite[index], Game.TILES_SIZE * i - lvlOffset, Game.TILES_SIZE * j, Game.TILES_SIZE, Game.TILES_SIZE, null);
+			}
+		}
+	}
 
-    public void update() {
-        // Update level logic here
-    }
+	public void update() {
 
-    public Levels getCurrentLevel(){
-        return level_one;
-    }
+	}
+
+	public Level getCurrentLevel() {
+		return levelOne;
+	}
+
 }
