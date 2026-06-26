@@ -14,15 +14,14 @@ public class Slime extends Enemy{
 	}
 
     private void updateMove(int[][] lvlData) {
-		if(firstUpdate){
+		if(firstUpdate)
 			firstUpdateCheck(lvlData);
-
 		if(inAir){
 			updateInAir(lvlData);
 		}else{
 			switch(enemyState){
 				case IDLE:
-					enemyState = RUNNING;
+					newState(RUNNING);
 					break;
 				case RUNNING:
 					move(lvlData);
