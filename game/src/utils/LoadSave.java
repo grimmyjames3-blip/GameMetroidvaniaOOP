@@ -4,7 +4,13 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
+
+import entities.Slime;
+import main.Game;
+
+import static utilz.Constants.EnemyConstants.ENEMY;
 
 public class LoadSave {
 
@@ -39,6 +45,20 @@ public class LoadSave {
         }
         return img;
     }
+
+	public static ArrayList<Slime> getSlimes(){
+		BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
+		ArrayList<Slime> list = new ArrayList<>();
+		
+		for (int j = 0; j < img.getHeight(); j++)
+			for (int i = 0; i < img.getWidth(); i++) {
+				Color color = new Color(img.getRGB(i, j));
+				int value = color.getGreen();
+				if (value >= ENEMY)
+					list.add(new Slime(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+			}
+		return list;
+	}
 
     public static int[][] GetLevelData() {
 		BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
