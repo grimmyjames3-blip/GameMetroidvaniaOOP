@@ -19,6 +19,8 @@ public class LoadSave {
 	public static final String VOLUME_BUTTONS = "volume_buttons.png";
 	public static final String PLAYING_BG_1 = "bg1.png";
 	public static final String SMALL_CLOUDS = "small_cloud.png";
+	// Sesuaikan nama res slime dengan nama file slime di dalam res folder
+	public static final String SLIME_SPRITE = "slime_sprite.png";
     
     public static BufferedImage GetSpriteAtlas(String fileName) {
         BufferedImage img = null;
