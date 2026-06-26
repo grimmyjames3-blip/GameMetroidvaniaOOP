@@ -67,7 +67,7 @@ public class Playing extends State implements Statemethods{
     private void initClasses() {
         levelManager = new LevelManager(game);
 		enemyManager = new EnemyManager(this);
-        player = new Player(250, 500, (int)(69 * Game.SCALE), (int)(44 * Game.SCALE));
+        player = new Player(250, 500, (int)(69 * Game.SCALE), (int)(44 * Game.SCALE), this);
 		player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
 		player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn()); 
         pauseOverlay = new PauseOverlay(this);
@@ -134,6 +134,10 @@ public class Playing extends State implements Statemethods{
 		lvlCompleted = false;
 		player.resetAll();
 		enemyManager.resetAllEnemies();
+	}
+
+	public void checkEnemyHit(Rectangle2D.Float attackBox){
+		enemyManager.checkPlayerHit(attackBox);
 	}
 	
 	@Override
