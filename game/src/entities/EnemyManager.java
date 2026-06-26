@@ -49,6 +49,15 @@ public class EnemyManager {
 		}
 	}
 
+	public void checkEnemyHit(Rectangele2D.Float attackBox){
+		for(Slime s : slimes){
+			if(attackBox.intersects(s.getHitbox())){
+				s.hurt(10);
+				return;
+			}
+		}
+	}
+
 	private void loadEnemyImgs() {
 		EnemyArr = new BufferedImage[5][9];
 		BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.ENEMY_SPRITE);
