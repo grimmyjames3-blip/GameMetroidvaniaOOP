@@ -20,7 +20,7 @@ public class Slime extends Enemy{
 	}
 
 	public void update(int[][] lvlData, Player player) {
-		updateMove(lvlData, player);
+		updateBehaviour(lvlData, player);
 		updateAnimationTick();
 		updateAttackBox();
 	}
@@ -30,7 +30,7 @@ public class Slime extends Enemy{
 		attackBox.y = hitBox.y;
 	}
 
-    private void updateMove(int[][] lvlData, Player player) {
+    private void updateBehaviour(int[][] lvlData, Player player) {
 		if(firstUpdate)
 			firstUpdateCheck(lvlData);
 		if(inAir){
@@ -48,6 +48,14 @@ public class Slime extends Enemy{
 						newState(ATTACK);
 					}
 					move(lvlData);
+					break;
+				case ATTACK:
+					// Buat check animasi attack enemy apakah kena player di animationIndex sprite ke berapa
+					if(aniIndex == 3 && !attackChecked){
+						
+					}
+					break;
+				case HIT:
 					break;
 			}
 		}
