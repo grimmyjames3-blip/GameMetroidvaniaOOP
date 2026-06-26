@@ -15,10 +15,7 @@ public class Slime extends Enemy{
 
     private void updateMove(int[][] lvlData) {
 		if(firstUpdate){
-			if(!IsEntityOnFloor(hitbox, lvlData))
-				inAir = true;
-			firstUpdate = false;
-		}
+			firstUpdateCheck(lvlData);
 
 		if(inAir){
 			if(CanMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.width, hitbox.height, lvlData)){
