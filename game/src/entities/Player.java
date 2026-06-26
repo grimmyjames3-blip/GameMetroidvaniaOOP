@@ -94,12 +94,11 @@ public class Player extends Entity {
 	}
 
     public void update() {
+		updateHealthBar();
 		if(currentHealth <= 0){
 			playing.setGameOver(true);
 			return;
 		}
-		
-		updateHealthBar();
 		updateAttackBox();
         updatePos();
 		if(attacking){
