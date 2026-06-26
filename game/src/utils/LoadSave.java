@@ -47,7 +47,7 @@ public class LoadSave {
     }
 
 	public static ArrayList<Slime> GetSlimes(){
-		BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
+		BufferedImage img = GetSpriteAtlas(SLIME_SPRITE);
 		ArrayList<Slime> list = new ArrayList<>();
 		
 		for (int j = 0; j < img.getHeight(); j++)
