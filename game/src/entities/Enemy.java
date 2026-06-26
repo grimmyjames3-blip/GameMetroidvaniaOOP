@@ -20,7 +20,7 @@ public abstract class Enemy extends Entity{
         initHitbox(x, y, width, height);
     }
 
-    private void updateAnimationTick() {
+    protected void updateAnimationTick() {
 		aniTick++;
 		if (aniTick >= aniSpeed) {
 			aniTick = 0;
@@ -31,7 +31,7 @@ public abstract class Enemy extends Entity{
 		}
 	}
 
-	private void changeWalkDir() {
+	protected void changeWalkDir() {
 		if(walkDir == LEFT){
 			walkDir = RIGHT;
 		}else{
