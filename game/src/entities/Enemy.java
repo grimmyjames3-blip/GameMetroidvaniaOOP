@@ -107,6 +107,10 @@ public abstract class Enemy extends Entity{
 		}
 	}
 
+	protected void checkEnemyHit(Player player){
+		if()
+	}
+
     protected void updateAnimationTick() {
 		aniTick++;
 		if (aniTick >= aniSpeed) {
