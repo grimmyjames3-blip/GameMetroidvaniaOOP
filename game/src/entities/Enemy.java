@@ -31,13 +31,6 @@ public abstract class Enemy extends Entity{
 		}
 	}
 
-    public void update(int[][] lvlData) {
-		updateMove(lvlData);
-		updateAnimationTick();
-	}
-
-	
-
 	private void changeWalkDir() {
 		if(walkDir == LEFT){
 			walkDir = RIGHT;
