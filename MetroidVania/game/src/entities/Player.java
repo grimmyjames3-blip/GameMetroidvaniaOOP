@@ -262,6 +262,13 @@ public class Player extends Entity {
 		else if (currentHealth >= maxHealth)
 			currentHealth = maxHealth;
 	}
+	public void kill() {
+		currentHealth = 0;
+	}
+
+	public void changePower(int value) {
+		System.out.println("Added power!");
+	}
 
 	private void loadAnimations() {
 		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);

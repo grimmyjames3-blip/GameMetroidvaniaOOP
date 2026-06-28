@@ -90,7 +90,7 @@ public class Playing extends State implements Statemethods {
 			levelManager.update();
 
 			// error di bagian line 93-96
-			objectManager.update(levelManager.getCurrentLevel().getLevelData(), player);
+			objects.ObjectManager.update(levelManager.getCurrentLevel().getLevelData(), player);
 			player.update();
 			enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
 			checkCloseToBorder();

@@ -6,6 +6,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import main.Game;
 import objects.Cannon;
+import objects.GameContainer;
+import objects.Potion;
+import objects.Spike;
 import utils.HelpMethods;
 import static utils.HelpMethods.GetLevelData;
 import static utils.HelpMethods.GetPlayerSpawn;
@@ -22,6 +25,9 @@ public class Level {
 	private Point playerSpawn;
 
 	private ArrayList<Cannon> cannons;
+	private ArrayList<Potion> potions;
+	private ArrayList<Spike> spikes;
+	private ArrayList<GameContainer> containers;
 	
 	public Level(BufferedImage img) {
 		this.img = img;
@@ -29,9 +35,23 @@ public class Level {
 		createEnemies();
 		calcLvlOffsets();
 		calcPlayerSpawn();
-
+		createPotions();
+		createContainers();
+		createSpikes();
 		createCannons();
 
+	}
+
+	private void createSpikes() {
+		spikes = HelpMethods.GetSpikes(img);
+	}
+
+	private void createContainers() {
+		containers = HelpMethods.GetContainers(img);
+	}
+
+	private void createPotions() {
+		potions = HelpMethods.GetPotions(img);
 	}
 
 	private void createCannons() {
@@ -80,4 +100,15 @@ public class Level {
 		return cannons;
 	}
 
+	public ArrayList<Potion> getPotions() {
+		return potions;
+	}
+
+	public ArrayList<GameContainer> getContainers() {
+		return containers;
+	}
+
+	public ArrayList<Spike> getSpikes() {
+		return spikes;
+	}
 }
