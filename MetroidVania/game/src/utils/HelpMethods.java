@@ -7,6 +7,10 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import main.Game;
+import objects.Cannon;
+import objects.Projectile;
+import static utils.Constants.CANNON_LEFT;
+import static utils.Constants.CANNON_RIGHT;
 
 public class HelpMethods {
 
@@ -30,6 +34,11 @@ public class HelpMethods {
 		return IsTileSolid((int) xIndex, (int) yIndex, lvlData);
 	}
 
+	public static boolean IsProjectileHittingLevel(Projectile p, int[][] lvlData) {
+		return IsSolid(p.getHitbox().x + p.getHitbox().width / 2, p.getHitbox().y + p.getHitbox().height / 2, lvlData);
+
+
+	}
 	public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
 		int value = lvlData[yTile][xTile];
 		if (value >= 162 || value < 0 || (value != 11 && value != 13 && value != 44 && value != 43))
@@ -122,5 +131,20 @@ public class HelpMethods {
 					return new Point(i * Game.TILES_SIZE, j * Game.TILES_SIZE);
 			}
 		return new Point(1 * Game.TILES_SIZE, 1 * Game.TILES_SIZE);
+	}
+
+
+	public static ArrayList<Cannon> GetCannons(BufferedImage img) {
+		ArrayList<Cannon> list = new ArrayList<>();
+
+		for (int j = 0; j < img.getHeight(); j++)
+			for (int i = 0; i < img.getWidth(); i++) {
+				Color color = new Color(img.getRGB(i, j));
+				int value = color.getBlue();
+				if (value == CANNON_LEFT || value == CANNON_RIGHT)
+					list.add(new Cannon(i*Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+			}
+
+		return list;
 	}
 }

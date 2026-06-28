@@ -7,6 +7,23 @@ public class Constants {
     public static final float GRAVITY = 0.04f * Game.SCALE;
     public static final int ANI_SPEED = 25;
 
+    public static class Projectiles{
+		public static final int CANNON_BALL_DEFAULT_WIDTH = 15;
+		public static final int CANNON_BALL_DEFAULT_HEIGHT = 15;
+		
+		public static final int CANNON_BALL_WIDTH = (int)(Game.SCALE * CANNON_BALL_DEFAULT_WIDTH);
+		public static final int CANNON_BALL_HEIGHT = (int)(Game.SCALE * CANNON_BALL_DEFAULT_HEIGHT);
+		public static final float SPEED = 0.75f * Game.SCALE;
+	}
+    
+    // public static class ObjectConstants {
+        public static final int CANNON_LEFT = 5;
+        public static final int CANNON_RIGHT = 6;
+
+    // }
+    
+
+
     public static class Environment{
         public static final int SMALL_CLOUD_WIDTH_DEFAULT = 55;
         public static final int SMALL_CLOUD_HEIGHT_DEFAULT = 16;
@@ -63,6 +80,11 @@ public class Constants {
         public static final int ENEMY_DRAWOFFSET_X = (int) (26 * Game.SCALE);
         public static final int ENEMY_DRAWOFFSET_Y = (int) (9 * Game.SCALE);
 
+        public static final int CANNON_WIDTH_DEFAULT = 40;
+		public static final int CANNON_HEIGHT_DEFAULT = 26;
+		public static final int CANNON_WIDTH = (int) (CANNON_WIDTH_DEFAULT * Game.SCALE);
+		public static final int CANNON_HEIGHT = (int) (CANNON_HEIGHT_DEFAULT * Game.SCALE);
+
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
 			switch (enemy_type) {
 				case ENEMY:
@@ -77,7 +99,10 @@ public class Constants {
 					return 4;
 				case DEAD:
 					return 5;
+                case CANNON_LEFT, CANNON_RIGHT:
+				    return 7;
 				}
+                
 			}
 			return 0;
 		}

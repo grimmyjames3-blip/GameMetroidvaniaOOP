@@ -79,19 +79,18 @@ public class Playing extends State implements Statemethods {
 		levelCompletedOverlay = new LevelCompletedOverlay(this);
 	}
 
+	
 	@Override
 	public void update() {
-		if (paused)
+		if (paused) {
 			pauseOverlay.update();
-		else if (lvlCompleted) {
+		} else if (lvlCompleted) {
 			levelCompletedOverlay.update();
-		}else if(gameOver){
-			gameOverOverlay.update();
-		}else if(playerDying){
-			player.update();
-
-		}else {
+		} else if (!gameOver) {
 			levelManager.update();
+
+			// error di bagian line 93-96
+			objectManager.update(levelManager.getCurrentLevel().getLevelData(), player);
 			player.update();
 			enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
 			checkCloseToBorder();
