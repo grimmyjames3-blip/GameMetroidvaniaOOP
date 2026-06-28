@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import entities.Slime;
 import main.Game;
 
-import static utilz.Constants.EnemyConstants.ENEMY;
+import static utils.Constants.EnemyConstants.ENEMY;
 
 public class LoadSave {
 
