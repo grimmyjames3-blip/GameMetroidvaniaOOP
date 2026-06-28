@@ -1,19 +1,23 @@
+// udah fix
 package objects;
 
+import entities.Player;
+import gamestates.Playing;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
-import entities.Player;
-import gamestates.Playing;
 import levels.Level;
 import main.Game;
-import utils.LoadSave;
+import static utils.Constants.CANNON_LEFT;
+import static utils.Constants.CANNON_RIGHT;
+import static utils.Constants.EnemyConstants.CANNON_HEIGHT;
+import static utils.Constants.EnemyConstants.CANNON_WIDTH;
 import static utils.Constants.ObjectConstants.*;
-import static utils.HelpMethods.CanCannonSeePlayer;
-import static utils.HelpMethods.IsProjectileHittingLevel;
 import static utils.Constants.Projectiles.*;
+import static utils.HelpMethods.IsProjectileHittingLevel;
+import static utils.HelpMethods.IsSightClear;
+import utils.LoadSave;
 
 public class ObjectManager {
 
@@ -147,14 +151,14 @@ public class ObjectManager {
 	private void updateCannons(int[][] lvlData, Player player) {
 		for (Cannon c : cannons) {
 			if (!c.doAnimation)
-				if (c.getTileY() == player.getTileY())
+				if (c.getTileY() == (int) (player.getHitbox().y / Game.TILES_SIZE))
 					if (isPlayerInRange(c, player))
 						if (isPlayerInfrontOfCannon(c, player))
-							if (CanCannonSeePlayer(lvlData, player.getHitbox(), c.getHitbox(), c.getTileY()))
+							if (IsSightClear(lvlData, player.getHitbox(), c.getHitbox(), c.getTileY()))
 								c.setAnimation(true);
 
 			c.update();
-			if (c.getAniIndex() == 4 && c.getAniTick() == 0)
+			if (c.getAniIndex() == 4 && c.aniTick == 0)
 				shootCannon(c);
 		}
 	}

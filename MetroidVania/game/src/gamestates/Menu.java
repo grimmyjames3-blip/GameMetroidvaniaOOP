@@ -65,16 +65,19 @@ public class Menu extends State implements Statemethods{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        for (MenuButton mb : buttons){
-            if (isIn(e, mb)){
-                if (mb.isMousePressed()){
-                    mb.applyGamestate();
-                    break;
-                }
-            }
-        }
-        resetButtons();
-    }
+		for (MenuButton mb : buttons) {
+			if (isIn(e, mb)) {
+				if (mb.isMousePressed())
+					mb.applyGamestate();
+				if (mb.getState() == Gamestate.PLAYING)
+					game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLevelIndex());
+				break;
+			}
+		}
+
+		resetButtons();
+
+	}
 
     private void resetButtons() {
         for (MenuButton mb : buttons){
