@@ -1,7 +1,5 @@
 package ui;
 
-import static utils.Constants.UI.URMButtons.URM_SIZE;
-
 import gamestates.Gamestate;
 import gamestates.Playing;
 import java.awt.Color;
@@ -9,8 +7,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-
-import main.Game;    
+import main.Game;
+import static utils.Constants.UI.URMButtons.URM_SIZE;    
 import utils.LoadSave;         
 
 
@@ -37,10 +35,10 @@ public class GameOverOverlay {
 
 	private void createImg() {
 		img = LoadSave.GetSpriteAtlas(LoadSave.DEATH_SCREEN);
-		imgX = (int) (img.getWidth() * Game.SCALE);
-		imgY = (int) (img.getHeight() * Game.SCALE);
-		imgW = Game.GAME_WIDTH / 2 - imgW / 2;
-		imgH = (int) (100 * Game.SCALE);
+		imgW = (int) (img.getWidth() * Game.SCALE);
+		imgH = (int) (img.getHeight() * Game.SCALE);
+		imgX = Game.GAME_WIDTH / 2 - imgW / 2;   // center X
+		imgY = (int) (100 * Game.SCALE);          // some Y position
 	}
 
 	public void draw(Graphics g) {

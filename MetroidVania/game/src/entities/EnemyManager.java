@@ -37,27 +37,33 @@ public class EnemyManager {
 			playing.setLevelCompleted(true);
 	}
 
-	public void draw(Graphics g, int xLvlOffset) {
-		drawSlimes(g, xLvlOffset);
+	public void draw(Graphics g, int xLvlOffset, int lvlOffsetY) {
+		drawSlimes(g, xLvlOffset, lvlOffsetY);
 	}
 
-	private void drawSlimes(Graphics g, int xLvlOffset) {
+	private void drawSlimes(Graphics g, int xLvlOffset, int lvlOffsetY) {
 		for (Slime s : slimes) {
-			if (s.isActive()) {
-				// FIX: was s.drawImage() — Slime has no such method; use g.drawImage() directly
-				g.drawImage(
-					enemyArr[s.getEnemyState()][s.getAniIndex()],
-					(int) s.getHitbox().x - xLvlOffset - ENEMY_DRAWOFFSET_X + s.flipX(),
-					(int) s.getHitbox().y - ENEMY_DRAWOFFSET_Y,
-					ENEMY_WIDTH * s.flipW(),
-					ENEMY_HEIGHT,
-					null
-				);
+			if (!s.isActive()) continue;
+
+			int flipW = s.flipW();
+			int drawX;
+			if (flipW == 1) {
+				// facing right (default): normal offset
+				drawX = (int)(s.getHitbox().x - xLvlOffset - ENEMY_DRAWOFFSET_X);
+			} else {
+				// facing left (flipped): mirror the offset
+				drawX = (int)(s.getHitbox().x - xLvlOffset - ENEMY_DRAWOFFSET_X) + ENEMY_WIDTH;
 			}
+
+			g.drawImage(enemyArr[s.getEnemyState()][s.getAniIndex()],
+				drawX,
+				(int)(s.getHitbox().y - lvlOffsetY - ENEMY_DRAWOFFSET_Y),
+				ENEMY_WIDTH * flipW,
+				ENEMY_HEIGHT,
+				null);
 		}
 	}
 
-	// FIX: was "Rectangele2D" (typo)
 	public void checkEnemyHit(Rectangle2D.Float attackBox) {
 		for (Slime s : slimes) {
 			if (s.isActive()) {

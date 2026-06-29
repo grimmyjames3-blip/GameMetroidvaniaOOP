@@ -1,14 +1,13 @@
 package ui;
 
+import gamestates.Gamestate;
+import gamestates.Playing;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-
-import gamestates.Gamestate;
-import gamestates.Playing;
 import main.Game;
-import utils.LoadSave;                        
-import static utils.Constants.UI.URMButtons.*; 
+import static utils.Constants.UI.URMButtons.*;
+import utils.LoadSave; 
 
 // FIX: class renamed to LevelCompletedOverlay (was levelCompletedOverlay — Java requires PascalCase for class names)
 // FIX: file must also be renamed to LevelCompletedOverlay.java
@@ -67,9 +66,10 @@ public class LevelCompletedOverlay {
 
 	public void mouseReleased(MouseEvent e) {
 		if (isIn(menu, e)) {
-			if (menu.isMousePressed())
+			if (menu.isMousePressed()){
 				playing.resetAll();
 				playing.setGamestate(Gamestate.MENU);
+			}
 		} else if (isIn(next, e)) {
 			if (next.isMousePressed()){
 				playing.loadNextLevel();

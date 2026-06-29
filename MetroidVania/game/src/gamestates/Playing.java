@@ -32,9 +32,16 @@ public class Playing extends State implements Statemethods {
 	private int xLvlOffset;
 	private int leftBorder = (int) (0.35 * Game.GAME_WIDTH);
 	private int rightBorder = (int) (0.65 * Game.GAME_WIDTH);
-	private int lvlTilesWide = LoadSave.GetLevelData()[0].length;
-	private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
-	private int maxLvlOffsetX = maxTilesOffset * Game.TILES_SIZE;
+	private int maxLvlOffsetX;
+
+	private int yLvlOffset;
+	private int topBorder = (int) (0.35 * Game.GAME_HEIGHT);
+	private int bottomBorder = (int) (0.65 * Game.GAME_HEIGHT);
+	private int maxLvlOffsetY;
+
+	private int lvlTilesWide;
+	private int maxTilesOffset;
+	
 	private BufferedImage backgroundImg, smallCloud;
 	private int[] smallCloudsPos;
 	private Random rnd = new Random();
@@ -69,8 +76,13 @@ public class Playing extends State implements Statemethods {
 	}
 
 	private void calcLvlOffsets() {
-		maxLvlOffsetX = levelManager.getCurrentLevel().getLvlOffset();
-	}
+    lvlTilesWide = levelManager.getCurrentLevel().getLevelData()[0].length;
+    maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
+    maxLvlOffsetX = levelManager.getCurrentLevel().getLvlOffset();
+
+    int lvlTilesTall = levelManager.getCurrentLevel().getLevelData().length;
+    maxLvlOffsetY = Math.max(0, (lvlTilesTall - Game.TILES_IN_HEIGHT) * Game.TILES_SIZE);
+}
 
 	private void initClasses() {
 		levelManager = new LevelManager(game);
@@ -91,7 +103,11 @@ public class Playing extends State implements Statemethods {
 			pauseOverlay.update();
 		} else if (lvlCompleted) {
 			levelCompletedOverlay.update();
-		} else if (!gameOver) {
+		} else if(gameOver) {
+			gameOverOverlay.update();
+		}else if(playerDying) {
+			player.update();
+		}else if (!gameOver) {
 			levelManager.update();
 
 			objectManager.update(levelManager.getCurrentLevel().getLevelData(), player);
@@ -102,28 +118,37 @@ public class Playing extends State implements Statemethods {
 	}
 
 	private void checkCloseToBorder() {
+    	// X
 		int playerX = (int) player.getHitbox().x;
-		int diff = playerX - xLvlOffset;
+		int diffX = playerX - xLvlOffset;
+		if (diffX > rightBorder)
+			xLvlOffset += diffX - rightBorder;
+		else if (diffX < leftBorder)
+			xLvlOffset += diffX - leftBorder;
 
-		if (diff > rightBorder)
-			xLvlOffset += diff - rightBorder;
-		else if (diff < leftBorder)
-			xLvlOffset += diff - leftBorder;
+		if (xLvlOffset > maxLvlOffsetX) xLvlOffset = maxLvlOffsetX;
+		else if (xLvlOffset < 0)        xLvlOffset = 0;
 
-		if (xLvlOffset > maxLvlOffsetX)
-			xLvlOffset = maxLvlOffsetX;
-		else if (xLvlOffset < 0)
-			xLvlOffset = 0;
+		// Y
+		int playerY = (int) player.getHitbox().y;
+		int diffY = playerY - yLvlOffset;
+		if (diffY > bottomBorder)
+			yLvlOffset += diffY - bottomBorder;
+		else if (diffY < topBorder)
+			yLvlOffset += diffY - topBorder;
+
+		if (yLvlOffset > maxLvlOffsetY) yLvlOffset = maxLvlOffsetY;
+		else if (yLvlOffset < 0)        yLvlOffset = 0;
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
 		drawClouds(g);
-		levelManager.draw(g, xLvlOffset);
-		player.render(g, xLvlOffset);
-		enemyManager.draw(g, xLvlOffset);
-		objectManager.draw(g, xLvlOffset);
+		levelManager.draw(g, xLvlOffset, yLvlOffset);
+		player.render(g, xLvlOffset, yLvlOffset);
+		enemyManager.draw(g, xLvlOffset, yLvlOffset);
+		objectManager.draw(g, xLvlOffset, yLvlOffset);
 
 		if (paused) {
 			g.setColor(new Color(0, 0, 0, 150));

@@ -1,6 +1,5 @@
 package utils;
 
-import static utils.Constants.ObjectConstants.*;
 import entities.Slime;
 import java.awt.Color;
 import java.awt.Point;
@@ -13,9 +12,9 @@ import objects.GameContainer;
 import objects.Potion;
 import objects.Projectile;
 import objects.Spike;
-
 import static utils.Constants.CANNON_LEFT;
 import static utils.Constants.CANNON_RIGHT;
+import static utils.Constants.ObjectConstants.*;
 
 public class HelpMethods {
 
@@ -28,11 +27,12 @@ public class HelpMethods {
 		return false;
 	}
 
-	private static boolean IsSolid(float x, float y, int[][] lvlData) {
+	public static boolean IsSolid(float x, float y, int[][] lvlData) {
 		int maxWidth = lvlData[0].length * Game.TILES_SIZE;
+		int maxHeight = lvlData.length * Game.TILES_SIZE;
 		if (x < 0 || x >= maxWidth)
 			return true;
-		if (y < 0 || y >= Game.GAME_HEIGHT)
+		if (y < 0 || y >= maxHeight)
 			return true;
 		float xIndex = x / Game.TILES_SIZE;
 		float yIndex = y / Game.TILES_SIZE;
@@ -41,12 +41,11 @@ public class HelpMethods {
 
 	public static boolean IsProjectileHittingLevel(Projectile p, int[][] lvlData) {
 		return IsSolid(p.getHitbox().x + p.getHitbox().width / 2, p.getHitbox().y + p.getHitbox().height / 2, lvlData);
-
-
 	}
+
 	public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
 		int value = lvlData[yTile][xTile];
-		if (value >= 162 || value < 0 || (value != 11 && value != 13 && value != 44 && value != 43))
+		if (value >= 162 || value < 0 || (value != 13 && value != 44 && value != 43))
 			return true;
 		return false;
 	}
@@ -60,6 +59,19 @@ public class HelpMethods {
 		} else {
 			return currentTile * Game.TILES_SIZE;
 		}
+	}
+
+	public static boolean IsNextToWall(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+		if (xSpeed > 0)
+			return IsSolid(hitbox.x + hitbox.width + xSpeed, hitbox.y, lvlData);
+		else
+			return IsSolid(hitbox.x + xSpeed, hitbox.y, lvlData);
+	}
+
+	public static boolean IsLedgeAbove(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+		float wallX = (xSpeed > 0) ? hitbox.x + hitbox.width + xSpeed : hitbox.x + xSpeed;
+		float aboveWallY = hitbox.y - Game.TILES_SIZE;
+		return !IsSolid(wallX, aboveWallY, lvlData);
 	}
 
 	public static float GetEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float airSpeed) {
@@ -108,7 +120,7 @@ public class HelpMethods {
 			for (int i = 0; i < img.getWidth(); i++) {
 				Color color = new Color(img.getRGB(i, j));
 				int value = color.getRed();
-				if (value >= 48)
+				if (value >= 162)
 					value = 0;
 				lvlData[j][i] = value;
 			}

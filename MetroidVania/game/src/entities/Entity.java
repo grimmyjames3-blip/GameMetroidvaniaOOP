@@ -27,16 +27,15 @@ public abstract class Entity {
 
 	}
 
-	private void drawAttackBox(Graphics g, int lvlOffsetX) {
-		g.setColor(Color.red);
-		g.drawRect((int) attackBox.x - lvlOffsetX, (int) attackBox.y, (int) attackBox.width, (int) attackBox.height);
-	}
+	// private void drawAttackBox(Graphics g, int lvlOffsetX) {
+	// 	g.setColor(Color.red);
+	// 	g.drawRect((int) attackBox.x - lvlOffsetX, (int) attackBox.y, (int) attackBox.width, (int) attackBox.height);
+	// }
 
-	protected void drawHitbox(Graphics g, int xLvlOffset) {
-		// For debugging the hitbox
+	protected void drawHitbox(Graphics g, int xLvlOffset, int lvlOffsetY) {
 		g.setColor(Color.PINK);
-		g.drawRect((int) hitbox.x - xLvlOffset, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
-
+		g.drawRect((int) hitbox.x - xLvlOffset, (int) hitbox.y - lvlOffsetY,
+				(int) hitbox.width, (int) hitbox.height);
 	}
 
 	protected void initHitbox(float x, float y, int width, int height) {

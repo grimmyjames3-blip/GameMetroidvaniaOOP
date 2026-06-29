@@ -1,4 +1,3 @@
-// udah fix
 package objects;
 
 import entities.Player;
@@ -172,61 +171,64 @@ public class ObjectManager {
 
 	}
 
-	public void draw(Graphics g, int xLvlOffset) {
-		drawPotions(g, xLvlOffset);
-		drawContainers(g, xLvlOffset);
-		drawTraps(g, xLvlOffset);
-		drawCannons(g, xLvlOffset);
-		drawProjectiles(g, xLvlOffset);
+	public void draw(Graphics g, int xLvlOffset, int lvlOffsetY) {
+		drawPotions(g, xLvlOffset, lvlOffsetY);
+		drawContainers(g, xLvlOffset, lvlOffsetY);
+		drawTraps(g, xLvlOffset, lvlOffsetY);
+		drawCannons(g, xLvlOffset, lvlOffsetY);
+		drawProjectiles(g, xLvlOffset, lvlOffsetY);
 	}
 
-	private void drawProjectiles(Graphics g, int xLvlOffset) {
+	private void drawProjectiles(Graphics g, int xLvlOffset, int lvlOffsetY) {
 		for (Projectile p : projectiles)
 			if (p.isActive())
-				g.drawImage(cannonBallImg, (int) (p.getHitbox().x - xLvlOffset), (int) (p.getHitbox().y), CANNON_BALL_WIDTH, CANNON_BALL_HEIGHT, null);
-
+				g.drawImage(cannonBallImg,
+					(int)(p.getHitbox().x - xLvlOffset),
+					(int)(p.getHitbox().y - lvlOffsetY),
+					CANNON_BALL_WIDTH, CANNON_BALL_HEIGHT, null);
 	}
 
-	private void drawCannons(Graphics g, int xLvlOffset) {
+	private void drawCannons(Graphics g, int xLvlOffset, int lvlOffsetY) {
 		for (Cannon c : cannons) {
-			int x = (int) (c.getHitbox().x - xLvlOffset);
+			int x = (int)(c.getHitbox().x - xLvlOffset);
 			int width = CANNON_WIDTH;
-
 			if (c.getObjType() == CANNON_RIGHT) {
 				x += width;
 				width *= -1;
 			}
-
-			g.drawImage(cannonImgs[c.getAniIndex()], x, (int) (c.getHitbox().y), width, CANNON_HEIGHT, null);
+			g.drawImage(cannonImgs[c.getAniIndex()], x,
+				(int)(c.getHitbox().y - lvlOffsetY),
+				width, CANNON_HEIGHT, null);
 		}
-
 	}
 
-	private void drawTraps(Graphics g, int xLvlOffset) {
+	private void drawTraps(Graphics g, int xLvlOffset, int lvlOffsetY) {
 		for (Spike s : spikes)
-			g.drawImage(spikeImg, (int) (s.getHitbox().x - xLvlOffset), (int) (s.getHitbox().y - s.getyDrawOffset()), SPIKE_WIDTH, SPIKE_HEIGHT, null);
-
+			g.drawImage(spikeImg,
+				(int)(s.getHitbox().x - xLvlOffset),
+				(int)(s.getHitbox().y - s.getyDrawOffset() - lvlOffsetY),
+				SPIKE_WIDTH, SPIKE_HEIGHT, null);
 	}
 
-	private void drawContainers(Graphics g, int xLvlOffset) {
+	private void drawContainers(Graphics g, int xLvlOffset, int lvlOffsetY) {
 		for (GameContainer gc : containers)
 			if (gc.isActive()) {
-				int type = 0;
-				if (gc.getObjType() == BARREL)
-					type = 1;
-				g.drawImage(containerImgs[type][gc.getAniIndex()], (int) (gc.getHitbox().x - gc.getxDrawOffset() - xLvlOffset), (int) (gc.getHitbox().y - gc.getyDrawOffset()), CONTAINER_WIDTH,
-						CONTAINER_HEIGHT, null);
+				int type = gc.getObjType() == BARREL ? 1 : 0;
+				g.drawImage(containerImgs[type][gc.getAniIndex()],
+					(int)(gc.getHitbox().x - gc.getxDrawOffset() - xLvlOffset),
+					(int)(gc.getHitbox().y - gc.getyDrawOffset() - lvlOffsetY),
+					CONTAINER_WIDTH, CONTAINER_HEIGHT, null);
 			}
 	}
 
-	private void drawPotions(Graphics g, int xLvlOffset) {
+	private void drawPotions(Graphics g, int xLvlOffset, int lvlOffsetY) {
 		for (Potion p : potions)
 			if (p.isActive()) {
-				int type = 0;
-				if (p.getObjType() == RED_POTION)
-					type = 1;
-				g.drawImage(potionImgs[type][p.getAniIndex()], (int) (p.getHitbox().x - p.getxDrawOffset() - xLvlOffset), (int) (p.getHitbox().y - p.getyDrawOffset()), POTION_WIDTH, POTION_HEIGHT,
-						null);
+				int type = p.getObjType() == RED_POTION ? 1 : 0;
+				g.drawImage(potionImgs[type][p.getAniIndex()],
+					(int)(p.getHitbox().x - p.getxDrawOffset() - xLvlOffset),
+					(int)(p.getHitbox().y - p.getyDrawOffset() - lvlOffsetY),
+					POTION_WIDTH, POTION_HEIGHT, null);
 			}
 	}
 

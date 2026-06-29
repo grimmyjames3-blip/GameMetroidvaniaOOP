@@ -60,12 +60,11 @@ public class Slime extends Enemy {
 			}
 		}
 	}
-
-	public int flipX() {
-		return (walkDir == RIGHT) ? width : 0;
-	}
-
 	public int flipW() {
 		return (walkDir == RIGHT) ? -1 : 1;
+	}
+
+	public int flipX() {
+		return 0;
 	}
 }

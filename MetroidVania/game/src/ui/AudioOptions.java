@@ -1,15 +1,11 @@
 package ui;
-//ini sudah bener && sesuai tolong jangan diubah
-
-import static utils.Constants.UI.PauseButtons.SOUND_SIZE;
-import static utils.Constants.UI.VolumeButtons.SLIDER_WIDTH;
-import static utils.Constants.UI.VolumeButtons.VOLUME_HEIGHT;
 
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-
-import gamestates.Gamestate;
 import main.Game;
+import static utils.Constants.UI.PauseButtons.SOUND_SIZE;
+import static utils.Constants.UI.VolumeButtons.SLIDER_WIDTH;
+import static utils.Constants.UI.VolumeButtons.VOLUME_HEIGHT;
 
 public class AudioOptions {
 
@@ -59,7 +55,7 @@ public class AudioOptions {
 			float valueBefore = volumeButton.getFloatValue();
 			volumeButton.changeX(e.getX());
 			float valueAfter = volumeButton.getFloatValue();
-			if(valueBefore != valueAfter)
+			if (valueBefore != valueAfter)
 				game.getAudioPlayer().setVolume(valueAfter);
 		}
 	}

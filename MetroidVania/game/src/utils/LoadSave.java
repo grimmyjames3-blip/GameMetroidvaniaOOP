@@ -17,9 +17,9 @@ public class LoadSave {
 
 	public static final String PLAYER_ATLAS   = "vend_sprites.png";
 	public static final String LEVEL_ATLAS    = "outside_sprites.png";
-	public static final String LEVEL_ONE_DATA = "level_one_data.png";
 	public static final String MENU_BUTTONS   = "menubuttons.png";
 	public static final String MENU_BACKGROUND= "menubackground.png";
+	public static final String MENU_BG        = "background_menu.png";
 	public static final String PAUSE_MENU     = "pause_menu.png";
 	public static final String SOUND_BUTTONS  = "sound_button.png";
 	public static final String URM_BUTTONS    = "urm_buttons.png";
@@ -35,7 +35,7 @@ public class LoadSave {
 	public static final String TRAP_ATLAS = "trap_atlas.png";
 	public static final String CANNON_ATLAS = "cannon_atlas.png";
 	public static final String CANNON_BALL = "ball.png";
-
+	public static final String OPTIONS_MENU = "options_background.png";
 
 
 	public static BufferedImage GetSpriteAtlas(String fileName) {
@@ -102,19 +102,5 @@ public class LoadSave {
 					list.add(new Slime(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
 			}
 		return list;
-	}
-
-	public static int[][] GetLevelData() {
-		BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
-		int[][] lvlData = new int[img.getHeight()][img.getWidth()];
-		for (int j = 0; j < img.getHeight(); j++)
-			for (int i = 0; i < img.getWidth(); i++) {
-				Color color = new Color(img.getRGB(i, j));
-				int value = color.getRed();
-				if (value >= 162)
-					value = 0;
-				lvlData[j][i] = value;
-			}
-		return lvlData;
 	}
 }

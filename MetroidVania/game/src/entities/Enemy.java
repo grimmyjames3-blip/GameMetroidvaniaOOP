@@ -127,5 +127,7 @@ public abstract class Enemy extends Entity {
 		airSpeed = 0;
 	}
 	
-	public boolean isActive()      { return active;     }
+	public boolean isActive() {
+		return active;    
+	}
 }
